@@ -1,0 +1,7 @@
+setup.py
+get_choice/__init__.py
+get_choice/chooser.py
+get_choice.egg-info/PKG-INFO
+get_choice.egg-info/SOURCES.txt
+get_choice.egg-info/dependency_links.txt
+get_choice.egg-info/top_level.txt
