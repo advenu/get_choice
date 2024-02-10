@@ -36,6 +36,7 @@ def get_choice(
     tries: int = 3,
     fmt: str | None = None,
     repls: list[str] | None = None,
+    get_int: bool = False
 ):
     """Prints all the `choices` with serial no. and asks user to choose one.
 
@@ -55,14 +56,18 @@ def get_choice(
         repls (list): List of `str` used as dict keys of the choices 
         to populate `fmt`.
             (optional, default is `None`)
+        get_int (bool): Returns the `index + 1` of the the choosen option.
+            (optional, default if False)
 
     Returns:
-        any: Type of `choice`.
+        any | int: Type of `choice` or it's `index + 1`.
     """
     print(f"\n{title}", end="\n\n" if title else "")
     _print_choices(choices, fmt, repls)
     try:
         i = _get_input_with_retries(len(choices), msg, tries)
+        if get_int:
+            return i
         return choices[i - 1]
     except Exception as e:
         print(e)
@@ -82,7 +87,7 @@ if __name__ == "__main__":
 
     choices = [{"id": i + 11, "title": f"Option {i + 1}"} for i in range(5)]
     choice = get_choice(
-        choices, "Options", fmt="Id: {}, Title: {}", repls=("id", "title")
+        choices, "Options", fmt="Id: {}, Title: {}", repls=("id", "title"), get_int=True
     )
 
     if choice:
